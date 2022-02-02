@@ -5,6 +5,7 @@
     "module": "commonjs",
     "sourceMap": true,
     "strict": true,
+    "useUnknownInCatchVariables": false,
     "moduleResolution": "node",
     "skipLibCheck": true,
     "baseUrl": "./",

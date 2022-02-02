@@ -10,7 +10,7 @@ export function getPropertyCustomDescriptors(
   const uxpinJsDocTags:string[] = propertySymbol
     .getJsDocTags()
     .filter((jsDocTag) => isValidDescriptor(`@${jsDocTag.name}`))
-    .map((jsDocTag) => `@${jsDocTag.name} ${jsDocTag.text}`);
+    .map((jsDocTag) => `@${jsDocTag.name} ${jsDocTag.text?.[0].text}`);
 
   return { descriptors: parseTags(uxpinJsDocTags) };
 }

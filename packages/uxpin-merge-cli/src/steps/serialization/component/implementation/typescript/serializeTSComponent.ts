@@ -1,3 +1,4 @@
+import { JSDocComment, NodeArray } from 'typescript';
 import { joinWarningLists } from '../../../../../common/warning/joinWarningLists';
 import { Warned } from '../../../../../common/warning/Warned';
 import { ComponentImplementationInfo } from '../../../../discovery/component/ComponentInfo';
@@ -30,14 +31,14 @@ export async function serializeTSComponent(component:ComponentImplementationInfo
   const parsedProps:PropDefinitionParsingResult[] = parseTSComponentProperties(context, declaration);
   const validatedProps:PropDefinitionSerializationResult[] = serializeAndValidateParsedProperties(parsedProps);
   const namespace:ComponentNamespace | undefined = getComponentNamespace(declaration, name);
-  const componentDocUrl:string | undefined = getComponentDocUrl(declaration);
+  const componentDocUrl:string | NodeArray<JSDocComment>  | undefined = getComponentDocUrl(declaration);
   const wrappers:ComponentWrapper[] = getComponentWrappers(declaration);
   const validatedWrappers:Warned<ComponentWrapper[]> = validateWrappers(wrappers, component);
   const defaultExported:boolean = isDefaultExported(declaration, context);
 
   return {
     result: {
-      componentDocUrl,
+      componentDocUrl: (typeof componentDocUrl === 'string' ? componentDocUrl : componentDocUrl?.[0].text),
       defaultExported,
       name,
       namespace,

@@ -6,7 +6,7 @@ export function getValidSymbol(symbol:ts.Symbol):ts.Symbol | undefined {
     return symbol;
   }
 
-  if (symbol.declarations.length > 0) {
+  if (symbol.declarations && symbol.declarations.length > 0) {
     const declaration:DeclarationWithSymbol | undefined = getFirstDeclarationWithSymbol(symbol.declarations);
 
     return declaration

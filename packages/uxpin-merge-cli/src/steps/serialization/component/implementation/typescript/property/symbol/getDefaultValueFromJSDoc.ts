@@ -19,10 +19,10 @@ export function getDefaultValueFromJSDoc(
   return { defaultValue: { value: defaultValue } };
 }
 
-function getDefaultTagValue(tags:ts.JSDocTagInfo[]):string | undefined {
-  const defaultTag:ts.JSDocTagInfo | undefined = tags.find((t) => t.name === JSDOC_TAG_NAME);
+function getDefaultTagValue(tags: ts.JSDocTagInfo[]): string | undefined {
+  const defaultTag: ts.JSDocTagInfo | undefined = tags.find((t) => t.name === JSDOC_TAG_NAME);
   if (defaultTag) {
-    return defaultTag.text;
+    return defaultTag.text?.[0].text;
   }
 }
 

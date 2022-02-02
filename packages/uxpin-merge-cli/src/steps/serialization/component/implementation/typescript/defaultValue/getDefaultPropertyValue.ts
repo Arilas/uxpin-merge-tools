@@ -31,8 +31,10 @@ export function getDefaultValueFromPropertyAccessExpression(
   context:TSSerializationContext,
   propertyInitializer:any,
 ):SupportedDefaultValue | undefined {
-  const symbol:ts.Symbol | undefined = context.checker.getSymbolAtLocation(propertyInitializer);
-  if (symbol && ts.isEnumMember(symbol.valueDeclaration) && symbol.valueDeclaration.initializer) {
+  const symbol: ts.Symbol | undefined = context.checker.getSymbolAtLocation(propertyInitializer);
+  // @ts-ignore
+  if (symbol && ts.isEnumMember(symbol.valueDeclaration as ts.Node) && symbol.valueDeclaration.initializer) {
+    // @ts-ignore
     return getDefaultPropertyValue(context, symbol.valueDeclaration.initializer);
   }
 
@@ -66,8 +68,10 @@ export function getDefaultValueFromIdentifier(
   context:TSSerializationContext,
   propertyInitializer:ts.Identifier,
 ):SupportedDefaultValue | undefined {
-  const symbol:ts.Symbol | undefined = context.checker.getSymbolAtLocation(propertyInitializer);
-  if (symbol && ts.isVariableDeclaration(symbol.valueDeclaration) && symbol.valueDeclaration.initializer) {
+  const symbol: ts.Symbol | undefined = context.checker.getSymbolAtLocation(propertyInitializer);
+  // @ts-ignore
+  if (symbol && ts.isVariableDeclaration(symbol.valueDeclaration as ts.Node) && symbol.valueDeclaration.initializer) {
+    // @ts-ignore
     return getDefaultPropertyValue(context, symbol.valueDeclaration.initializer);
   }
 }

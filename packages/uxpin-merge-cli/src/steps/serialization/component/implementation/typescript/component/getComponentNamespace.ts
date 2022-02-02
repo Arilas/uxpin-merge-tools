@@ -13,6 +13,6 @@ export function getComponentNamespace(component:ComponentDeclaration, name:strin
 
   return {
     importSlug: getComponentNamespaceImportSlug(namespace.comment, name),
-    name: namespace.comment,
+    name: typeof namespace.comment === 'string' ? namespace.comment : namespace.comment[0].text,
   };
 }
